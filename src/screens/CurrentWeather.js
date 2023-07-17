@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { WeatherType } from '../utilities/weatherType';
 const CurrentWeather = () => {
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ const CurrentWeather = () => {
       </View>
       <View style={styles.bodyWrapper}>
         <Text style={styles.desc}>Its sunny</Text>
-        <Text style={styles.mesg}>Its perfect t-shirt Weather</Text>
+        <Text style={styles.mesg}>{WeatherType['Clouds'].message}</Text>
       </View>
     </View>
   );
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    gap:20
   },
   sug: {
     fontSize: 20,
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
     width: '100%',
+    padding:5
   },
   desc: {
     fontSize: 48,
