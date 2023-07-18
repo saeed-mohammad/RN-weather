@@ -1,8 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import { WeatherType } from '../utilities/weatherType';
+import Geolocation from '@react-native-community/geolocation';
+
 const CurrentWeather = () => {
+
+  // getting the location position if requested granted...
+  const getLocation=()=>{
+    Geolocation.getCurrentPosition(
+      position=>{console.log(position)},
+      error=>{console.log(error.code,error.message)},
+      {enableHighAccuracy:true,timeout:15000,maximumAge:10000}
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
@@ -17,6 +29,11 @@ const CurrentWeather = () => {
       <View style={styles.bodyWrapper}>
         <Text style={styles.desc}>Its sunny</Text>
         <Text style={styles.mesg}>{WeatherType['Clouds'].message}</Text>
+        <TouchableOpacity
+        style={styles.locationBtn}
+        onPress={()=>getLocation()}>
+          <Text style={styles.locationTxt}>Get location </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -71,4 +88,15 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: 'black',
   },
+  locationBtn:{
+    width:'100%',
+  },
+  locationTxt:{
+    textAlign:'center',
+    color:'black',
+    backgroundColor:'royalblue',
+    padding:10,
+    fontSize:20,
+    marginHorizontal:10,
+  }
 });
