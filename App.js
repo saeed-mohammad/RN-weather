@@ -5,9 +5,8 @@ import BottomTab from './src/Navigation/BottomTab';
 import { useGetWeather } from './src/hooks/useGetWeather';
 
 const App = () => {
-  const [weather,loading,error]=useGetWeather();
-  console.log('weather:',[weather,loading,error]);
-
+  const [weather,loading,error]= useGetWeather();
+  console.log('weather:',weather);
 
   return (
     <NavigationContainer>
@@ -17,7 +16,7 @@ const App = () => {
             <ActivityIndicator size={'large'} color='royalblue'/>
           </View>
         ):(
-          <BottomTab weather={weather} />  
+          <BottomTab weatherData={weather} />  
          )}
       </SafeAreaView>
     </NavigationContainer>

@@ -57,6 +57,6 @@ const getLocation= ()=>{
       setLoading(false)
     }
   }
-
-  return[error,loading,weather]
+  console.log(weather)
+  return[weather,loading,error]
 }
