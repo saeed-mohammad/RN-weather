@@ -8,7 +8,8 @@ import City from '../screens/City';
 import Feather from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
-const BottomTab = () => {
+const BottomTab = ({weather}) => {
+  console.log('tab',weather)
   return (
         <Tab.Navigator 
         initialRouteName='Current'
@@ -21,10 +22,14 @@ const BottomTab = () => {
             headerTitleStyle:{fontWeight:'bold',fontSize:26,color:'tomato'},
             headerTitleAlign: 'center',
         }}>
-          <Tab.Screen name="Current" component={CurrentWeather} 
+          <Tab.Screen name="Current" 
           options={{
             tabBarIcon:({focused})=>  <Feather name={'droplet'} size={25} color={focused?'tomato':'black'}/>
-          }}/>
+          }}>
+            {
+            ()=> <CurrentWeather  weatherData={weather}/>
+            }
+          </Tab.Screen>
           <Tab.Screen name="UpComing" component={UpComingWeather}
           options={{
             tabBarIcon:({focused})=>  <Feather name={'clock'} size={25} color={focused?'tomato':'black'}/>

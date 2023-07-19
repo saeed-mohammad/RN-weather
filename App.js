@@ -1,28 +1,14 @@
-import {ActivityIndicator, SafeAreaView,View,PermissionsAndroid} from 'react-native';
-import React,{useEffect, useState} from 'react';
+import {ActivityIndicator, SafeAreaView,View} from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTab from './src/Navigation/BottomTab';
-
+import { useGetWeather } from './src/hooks/useGetWeather';
 
 const App = () => {
-  const [loading,setLoading]=useState(false);
-  // requesting the location permission....
-  useEffect(()=>{requestLocationPermission()},[])
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the location');
-      } else {
-        console.log('location permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-  
+  const [weather,loading,error]=useGetWeather();
+  console.log('weather:',[weather,loading,error]);
+
+
   return (
     <NavigationContainer>
       <SafeAreaView style={{flex: 1}}>
@@ -31,8 +17,8 @@ const App = () => {
             <ActivityIndicator size={'large'} color='royalblue'/>
           </View>
         ):(
-          <BottomTab />  
-        )}
+          <BottomTab weather={weather} />  
+         )}
       </SafeAreaView>
     </NavigationContainer>
   );

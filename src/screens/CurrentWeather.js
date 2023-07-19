@@ -1,30 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity, View, useAnimatedValue} from 'react-native';
-import React,{useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import { WeatherType } from '../utilities/weatherType';
-import Geolocation from '@react-native-community/geolocation';
 
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
 const CurrentWeather = () => {
-const [lat,setLat]=useState(null)
-const [lon,setLon]=useState(null)
-  // getting the location position if requested granted...
-  const getLocation=()=>{
-    Geolocation.getCurrentPosition(
-      position=>{
-        setLat(position.coords.latitude)
-        setLon(position.coords.longitude)
-        console.log(position)
-      },
-      error=>{console.log(error.code,error.message)},
-      {enableHighAccuracy:true,timeout:15000,maximumAge:10000}
-    )
-  }
-  // 
-  const fetchWeatherData=async()=>{
-    const response=await fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=53da6de51d5c79885b87080d900066e5`)
-  }
-
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
@@ -41,7 +20,7 @@ const [lon,setLon]=useState(null)
         <Text style={styles.mesg}>{WeatherType['Clouds'].message}</Text>
         <TouchableOpacity
         style={styles.locationBtn}
-        onPress={()=>getLocation()}>
+        onPress={()=>console.log('click')}>
           <Text style={styles.locationTxt}>Get location </Text>
         </TouchableOpacity>
       </View>
