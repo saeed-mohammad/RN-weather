@@ -1,48 +1,68 @@
-
-import React from 'react'
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+/* eslint-disable react/no-unstable-nested-components */
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CurrentWeather from '../screens/CurrentWeather';
 import UpComingWeather from '../screens/UpComingWeather';
 import City from '../screens/City';
 import Feather from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
-const BottomTab = (props) => {
-  const {weatherData}=props
-  console.log('tab',weatherData)
+const BottomTab = ({weather, error}) => {
+  // working...
+  // console.log('tab', weather);
   return (
-        <Tab.Navigator 
-        initialRouteName='Current'
-        screenOptions={{
-            tabBarActiveTintColor:'tomato',
-            tabBarInactiveTintColor:'grey',
-            
-            tabBarStyle:{backgroundColor:'lightblue'},
-            headerStyle:{backgroundColor:'lightblue'},
-            headerTitleStyle:{fontWeight:'bold',fontSize:26,color:'tomato'},
-            headerTitleAlign: 'center',
+    <Tab.Navigator
+      initialRouteName="Current"
+      screenOptions={{
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'grey',
+
+        tabBarStyle: {backgroundColor: 'lightblue'},
+        headerStyle: {backgroundColor: 'lightblue'},
+        headerTitleStyle: {fontWeight: 'bold', fontSize: 26, color: 'tomato'},
+        headerTitleAlign: 'center',
+      }}>
+      <Tab.Screen
+        name="Current"
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name={'droplet'}
+              size={25}
+              color={focused ? 'tomato' : 'black'}
+            />
+          ),
         }}>
-          <Tab.Screen name="Current" 
-          options={{
-            tabBarIcon:({focused})=>  <Feather name={'droplet'} size={25} color={focused?'tomato':'black'}/>
-          }}>
-            {
-            ()=> <CurrentWeather  weatherData={weatherData}/>
-            }
-          </Tab.Screen>
-          <Tab.Screen name="UpComing" component={UpComingWeather}
-          options={{
-            tabBarIcon:({focused})=>  <Feather name={'clock'} size={25} color={focused?'tomato':'black'}/>
-          }} />
-          <Tab.Screen name="City" component={City} 
-          options={{
-            tabBarIcon:({focused})=>  <Feather name={'home'} size={25} color={focused?'tomato':'black'}/>
-          }}/>
-        </Tab.Navigator>
-      );
-  
-}
+        {() => <CurrentWeather weather={weather} />}
+      </Tab.Screen>
+      <Tab.Screen
+        name="UpComing"
+        component={UpComingWeather}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name={'clock'}
+              size={25}
+              color={focused ? 'tomato' : 'black'}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="City"
+        component={City}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Feather
+              name={'home'}
+              size={25}
+              color={focused ? 'tomato' : 'black'}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
-export default BottomTab
-
+export default BottomTab;
