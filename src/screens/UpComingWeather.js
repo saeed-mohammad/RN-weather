@@ -47,7 +47,8 @@ const DATA = [
   },
 ];
 
-const UpComingWeather = () => {
+const UpComingWeather = ({weatherData}) => {
+  
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="royalblue" />
@@ -57,7 +58,7 @@ const UpComingWeather = () => {
         <FlatList
           // eslint-disable-next-line react-native/no-inline-styles
           style={{paddingTop: 16}}
-          data={DATA}
+          data={weatherData}
           keyExtractor={item => item.dt_txt}
           renderItem={({item}) => (
             <ListItem

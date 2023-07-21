@@ -33,11 +33,10 @@ const BottomTab = ({weather, error}) => {
             />
           ),
         }}>
-        {() => <CurrentWeather weather={weather} />}
+        {() => <CurrentWeather weatherData={weather} />}
       </Tab.Screen>
       <Tab.Screen
         name="UpComing"
-        component={UpComingWeather}
         options={{
           tabBarIcon: ({focused}) => (
             <Feather
@@ -47,10 +46,11 @@ const BottomTab = ({weather, error}) => {
             />
           ),
         }}
-      />
+      >
+        {() => <UpComingWeather weatherData={weather.list} />}
+      </Tab.Screen>
       <Tab.Screen
         name="City"
-        component={City}
         options={{
           tabBarIcon: ({focused}) => (
             <Feather
@@ -60,7 +60,9 @@ const BottomTab = ({weather, error}) => {
             />
           ),
         }}
-      />
+      >
+           {() => <City weatherData={weather.city} />}
+       </Tab.Screen>
     </Tab.Navigator>
   );
 };

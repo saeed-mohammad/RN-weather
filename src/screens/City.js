@@ -2,8 +2,10 @@ import {StyleSheet, Text, View, ImageBackground, StatusBar} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import IconText from '../components/IconText';
-
-const City = () => {
+import moment from 'moment';
+const City = ({weatherData}) => {
+  // console.log('city',weatherData)
+  const {country,name,population,sunrise,sunset}=weatherData
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="royalblue" />
@@ -12,17 +14,17 @@ const City = () => {
         resizeMode="cover"
         source={require('../../Assets/city.jpg')}>
         <View style={styles.contryContainer}>
-          <Text style={styles.country}>India</Text>
-          <Text style={styles.city}>Mumbai</Text>
+          <Text style={styles.country}>{country}</Text>
+          <Text style={styles.city}>{name}</Text>
         </View>
         <View  style={styles.userContainer}>
         <Feather name="user" size={100} color="red" />
-        <Text style={styles.userTxt}>8000</Text>
+        <Text style={styles.userTxt}>{`population: ${population}`}</Text>
         </View>
         
         <View style={styles.iconContainer}>
-        <IconText icon='sunrise' color='#fff' bodyTxt='10:46:58 am'/>
-        <IconText icon='sunset' color='#fff' bodyTxt='17:46:58 pm'/>
+        <IconText icon='sunrise' color='#fff' bodyTxt={moment(sunrise).format('h:mm:ss a')}/>
+        <IconText icon='sunset' color='#fff' bodyTxt={moment(sunset).format('h:mm:ss a')}/>
         </View> 
       </ImageBackground>
     </View>     

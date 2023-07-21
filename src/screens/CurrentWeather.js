@@ -10,32 +10,27 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import {WeatherType} from '../utilities/weatherType';
 
-const CurrentWeather = ({weather}) => {
+const CurrentWeather = ({weatherData}) => {
   // working
-  console.log('current:', weather);
-  //testing
-  // problem :
-  // console.log('current:', weather.list[0].main);
-  // const []
+  // console.log('current:', weatherData);
+  // console.log('current:', weatherData.list[0]);
+  
+  const {main:{temp,temp_max,temp_min,feels_like},weather}= weatherData.list[0]
+  const weatherCondition=weather[0].main
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
-        <Feather name="sun" size={100} color="#900" />
+        <Feather name={WeatherType[weatherCondition].icon} size={100} color="#900" />
       </View>
-      <Text style={styles.tempStyle}>6</Text>
-      <Text style={styles.opt}>Feels like 5</Text>
+      <Text style={styles.tempStyle}>{temp}°</Text>
+      <Text style={styles.opt}>{`feels like ${feels_like}°`}</Text>
       <View style={styles.sugContainer}>
-        <Text style={styles.sug}>High:8</Text>
-        <Text style={styles.sug}>Low:4</Text>
+        <Text style={styles.sug}>High: {temp_max}°</Text>
+        <Text style={styles.sug}>Low: {temp_min}°</Text>
       </View>
       <View style={styles.bodyWrapper}>
-        <Text style={styles.desc}>Its sunny</Text>
-        <Text style={styles.mesg}>{WeatherType['Clouds'].message}</Text>
-        <TouchableOpacity
-          style={styles.locationBtn}
-          onPress={() => console.log('click')}>
-          <Text style={styles.locationTxt}>Get location </Text>
-        </TouchableOpacity>
+        <Text style={styles.desc}>{weather[0].description}</Text>
+        <Text style={styles.mesg}>{WeatherType[weatherCondition].message}</Text>
       </View>
     </View>
   );

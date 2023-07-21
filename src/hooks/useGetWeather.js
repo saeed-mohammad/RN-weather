@@ -49,7 +49,7 @@ export const useGetWeather = () => {
     try {
       // console.log('lat and lon:',longitude,latitude)
       const response = await fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=53da6de51d5c79885b87080d900066e5`,
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=53da6de51d5c79885b87080d900066e5&units=metric`,
       );
       const data = await response.json();
       setWeather(data);
